@@ -8,6 +8,7 @@ haproxy_role_version: 0.0.1
 haproxy_install: false
 haproxy_enable: false
 haproxy_debug: false
+haproxy_debug2: false
 haproxy_backup_conf: false
 
 freebsd_install_method: packages
