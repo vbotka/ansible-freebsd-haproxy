@@ -5,6 +5,14 @@ vbotka.freebsd_haproxy 1.0 Release Notes
 .. contents:: Topics
 
 
+1.0.2
+=====
+
+Release Summary
+---------------
+Add Best Practices Guide to README.md
+
+
 1.0.1
 =====
 
