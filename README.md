@@ -99,7 +99,7 @@ A guide to deploying, tuning, and securing [HAProxy](https://www.haproxy.org/)
 - [2. Process Resource Limits](#2-process-resource-limits)
 - [3. Optimized HAProxy Configuration](#3-optimized-haproxy-configuration)
 - [4. Syslog Configuration](#4-syslog-configuration)
-- [5. High Availability & Security Hardening](#5-high-availability-security-hardening)
+- [5. High Availability & Security Hardening](#5-high-availability--security-hardening)
   - [CARP Failover (Active / Passive)](#carp-failover-active--passive)
   - [Packet Filter (PF) Rate-Limiting](#packet-filter-pf-rate-limiting)
 
