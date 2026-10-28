@@ -3,7 +3,7 @@
 [![license](https://img.shields.io/badge/license-BSD-red.svg)](https://www.freebsd.org/doc/en/articles/bsdl-gpl/article.html)
 [![GitHub tag](https://img.shields.io/github/v/tag/vbotka/ansible-freebsd-haproxy)](https://github.com/vbotka/ansible-freebsd-haproxy/tags)
 
-This role is included in the collection [vbotka.freebsd](https://galaxy.ansible.com/ui/repo/published/vbotka/freebsd/) as [vbotka.freebsd.haproxy](https://galaxy.ansible.com/ui/repo/published/vbotka/freebsd/content/role/haproxy/)
+This role is included in the collection [vbotka.freebsd](https://galaxy.ansible.com/ui/repo/published/vbotka/freebsd/) as [vbotka.freebsd.haproxy](https://galaxy.ansible.com/ui/repo/published/vbotka/freebsd/content/role/haproxy/).
 
 [Ansible role.](https://galaxy.ansible.com/vbotka/freebsd_haproxy/) FreeBSD. Install, configure, and run HAProxy.
 
@@ -18,12 +18,12 @@ This role is included in the collection [vbotka.freebsd](https://galaxy.ansible.
 
 ## Variables
 
-Review defaults and examples in vars.
+Review defaults and examples in `vars/`.
 
 
 ## Workflow
 
-1) Change shell to /bin/sh
+1) Change shell to `/bin/sh`
 
 ```bash
 shell> ansible haproxy -e 'ansible_shell_type=csh ansible_shell_executable=/bin/csh' -a 'sudo pw usermod freebsd -s /bin/sh'
@@ -103,7 +103,7 @@ A guide to deploying, tuning, and securing [HAProxy](https://www.haproxy.org/)
   - [CARP Failover (Active / Passive)](#carp-failover-active-passive)
   - [Packet Filter (PF) Rate-Limiting](#pf-rate-limiting)
 
-1. Kernel & Network Tuning
+### 1. Kernel & Network Tuning
 
 FreeBSD defaults are tuned for general-purpose server workloads. For
 high-concurrency proxy traffic, append the following optimizations to
@@ -144,7 +144,7 @@ Apply the changes immediately without rebooting:
 sysctl -f /etc/sysctl.conf
 ```
 
-2. Process Resource Limits
+### 2. Process Resource Limits
 
 By default, the daemon class restricts file descriptors per process. Add a
 dedicated profile for HAProxy in */etc/login.conf*:
@@ -162,7 +162,7 @@ Recompile the login capabilities database:
 cap_mkdb /etc/login.conf
 ```
 
-3. Optimized HAProxy Configuration
+### 3. Optimized HAProxy Configuration
 
 Place this configuration in */usr/local/etc/haproxy.conf*:
 
@@ -203,7 +203,7 @@ defaults
     timeout http-request    10000ms
 ```
 
-4. Syslog Configuration
+### 4. Syslog Configuration
 
 Prevent HAProxy access logs from cluttering */var/log/messages*:
 
@@ -219,9 +219,9 @@ local0.*                                        /var/log/haproxy.log
 /var/log/haproxy.log                    640  7     *    @T00  JC
 ```
 
-5. High Availability & Security Hardening
+### 5. High Availability & Security Hardening
 
-**CARP Failover (Active / Passive)**
+#### CARP Failover (Active / Passive)
 
 To run an active/passive HA cluster across two FreeBSD nodes using a shared Virtual IP (VIP):
 
@@ -243,7 +243,7 @@ ifconfig_em0_alias0="vhid 1 advskew 0 pass MySecretKey 192.168.1.100/24"
 ifconfig_em0_alias0="vhid 1 advskew 100 pass MySecretKey 192.168.1.100/24"
 ```
 
-**Packet Filter (PF) Rate-Limiting**
+#### Packet Filter (PF) Rate-Limiting
 
 Protect HAProxy from brute-force attacks and floods (*/etc/pf.conf*):
 
