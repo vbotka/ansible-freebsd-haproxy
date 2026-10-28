@@ -100,8 +100,8 @@ A guide to deploying, tuning, and securing [HAProxy](https://www.haproxy.org/)
 - [3. Optimized HAProxy Configuration](#3-optimized-haproxy-configuration)
 - [4. Syslog Configuration](#4-syslog-configuration)
 - [5. High Availability & Security Hardening](#5-high-availability-security-hardening)
-  - [CARP Failover (Active / Passive)](#carp-failover-active-passive)
-  - [Packet Filter (PF) Rate-Limiting](#pf-rate-limiting)
+  - [CARP Failover (Active / Passive)](#carp-failover-active--passive)
+  - [Packet Filter (PF) Rate-Limiting](#packet-filter-pf-rate-limiting)
 
 ### 1. Kernel & Network Tuning
 
@@ -222,7 +222,7 @@ local0.*                                        /var/log/haproxy.log
 
 ### 5. High Availability & Security Hardening
 
-### CARP Failover (Active / Passive)
+#### CARP Failover (Active / Passive)
 
 To run an active/passive HA cluster across two FreeBSD nodes using a shared Virtual IP (VIP):
 
@@ -244,7 +244,7 @@ ifconfig_em0_alias0="vhid 1 advskew 0 pass MySecretKey 192.168.1.100/24"
 ifconfig_em0_alias0="vhid 1 advskew 100 pass MySecretKey 192.168.1.100/24"
 ```
 
-### Packet Filter (PF) Rate-Limiting
+#### Packet Filter (PF) Rate-Limiting
 
 Protect HAProxy from brute-force attacks and floods (*/etc/pf.conf*):
 
