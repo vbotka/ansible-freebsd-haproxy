@@ -185,8 +185,9 @@ global
     stats socket /var/run/haproxy.sock mode 600 level admin expose-fd listeners
     stats timeout 30s
 
-    # Hardened TLS Settings
+    # Hardened TLS Settings (TLS 1.2 and TLS 1.3)
     ssl-default-bind-options ssl-min-ver TLSv1.2 no-tls-tickets
+    ssl-default-bind-ciphers ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384
     ssl-default-bind-ciphersuites TLS_AES_128_GCM_SHA256:TLS_AES_256_GCM_SHA384:TLS_CHACHA20_POLY1305_SHA256
     tune.ssl.cachesize 100000
     tune.ssl.lifetime 600
@@ -221,7 +222,7 @@ local0.*                                        /var/log/haproxy.log
 
 ### 5. High Availability & Security Hardening
 
-#### CARP Failover (Active / Passive)
+### CARP Failover (Active / Passive)
 
 To run an active/passive HA cluster across two FreeBSD nodes using a shared Virtual IP (VIP):
 
@@ -243,7 +244,7 @@ ifconfig_em0_alias0="vhid 1 advskew 0 pass MySecretKey 192.168.1.100/24"
 ifconfig_em0_alias0="vhid 1 advskew 100 pass MySecretKey 192.168.1.100/24"
 ```
 
-#### Packet Filter (PF) Rate-Limiting
+### Packet Filter (PF) Rate-Limiting
 
 Protect HAProxy from brute-force attacks and floods (*/etc/pf.conf*):
 
@@ -252,7 +253,6 @@ table <bruteforce> persist
 
 block quick from <bruteforce>
 
-pass in on $ext_if proto tcp to any port {80, 443} \
-    flags S/SA keep state \
+pass in on $ext_if proto tcp to any port {80, 443} flags S/SA keep state \
     (max-src-conn 200, max-src-conn-rate 100/5, overload <bruteforce> flush global)
 ```
